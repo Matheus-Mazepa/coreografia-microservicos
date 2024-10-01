@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-02
+  name: node-2
 spec:
   selector:
     matchLabels:
-      app: node-02
+      app: node-2
   template:
     metadata:
       labels:
-        app: node-02
+        app: node-2
     spec:
       containers:
         - name: kafka
-          image: node-02:dev
+          image: node-2:dev
           ports:
             - containerPort: 3000
           envFrom:

@@ -31,13 +31,13 @@ services:
     image: node-1:dev
     environment:
       KAFKA_BROKER: 'kafka:9092'
-      NODE01_KAFKA_CLIENT_ID: 'node01'
-      NODE01_KAFKA_GROUP_ID: 'node01-group'
+      NODE1_KAFKA_CLIENT_ID: 'node1'
+      NODE1_KAFKA_GROUP_ID: 'node1-group'
       POSTGRES_HOST: 'postgres'
       POSTGRES_PORT: '5432'
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'password'
-      POSTGRES_DATABASE_NODE01: 'node_01'
+      POSTGRES_DATABASE_NODE1: 'node_1'
     volumes:
       - ./node-1:/home/node/app
     ports:
@@ -55,13 +55,13 @@ services:
     image: node-2:dev
     environment:
       KAFKA_BROKER: 'kafka:9092'
-      NODE02_KAFKA_CLIENT_ID: 'node2'
-      NODE02_KAFKA_GROUP_ID: 'node2-group'
+      NODE2_KAFKA_CLIENT_ID: 'node2'
+      NODE2_KAFKA_GROUP_ID: 'node2-group'
       POSTGRES_HOST: 'postgres'
       POSTGRES_PORT: '5432'
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'password'
-      POSTGRES_DATABASE_NODE02: 'node_02'
+      POSTGRES_DATABASE_NODE2: 'node_2'
     volumes:
       - ./node-2:/home/node/app
     ports:
@@ -78,7 +78,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_MULTIPLE_DATABASES: master,node_01,node_02
+      POSTGRES_MULTIPLE_DATABASES: master,node_1,node_2
     volumes:
       - app-postgres-data:/var/lib/postgresql/data
       - ./postgres/scripts:/docker-entrypoint-initdb.d
