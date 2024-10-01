@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: master
+spec:
+  selector:
+    matchLabels:
+      app: master
+  template:
+    metadata:
+      labels:
+        app: master
+    spec:
+      containers:
+        - name: kafka
+          image: master:dev
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: app-env
