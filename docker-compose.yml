@@ -38,6 +38,7 @@ services:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'password'
       POSTGRES_DATABASE_NODE1: 'node_1'
+    restart: always
     volumes:
       - ./node-1:/home/node/app
     ports:
@@ -62,6 +63,7 @@ services:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'password'
       POSTGRES_DATABASE_NODE2: 'node_2'
+    restart: always
     volumes:
       - ./node-2:/home/node/app
     ports:
@@ -86,6 +88,17 @@ services:
       - "5434:5432"
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
+
+  # pumba: Será usado apenas em desenvolvimento para testar o resiliência do kafka
+  pumba:
+    image: gaiaadm/pumba:master
+    container_name: pumba
+    command: "--interval=30s -r stop --duration=10s --restart app-node-1 app-node-2"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - node-1
+      - node-2
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest

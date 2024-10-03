@@ -11,6 +11,10 @@ spec:
       labels:
         app: node-2
     spec:
+      initContainers:
+        - name: wait-for-kafka
+          image: busybox
+          command: ['sh', '-c', 'until nc -z kafka-service 9092; do echo waiting for kafka; sleep 2; done;'] 
       containers:
         - name: kafka
           image: mazepa/coreografia-microservicos:node-2
@@ -19,3 +23,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: app-env
+          resources:
+            requests:
+              memory: "512Mi"
+            limits:
+              memory: "1Gi"
