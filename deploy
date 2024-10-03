@@ -1,0 +1,27 @@
+#!/bin/bash
+
+handle_command() {
+  if [[ $1 == "start" ]]; then
+    start_deploy
+  fi
+
+   if [[ $1 == "restart" ]]; then
+      restart_deploy
+    fi
+}
+
+start_deploy() {
+    echo -e "[\e[33mWAIT\e[39m] Deployment"
+    kubectl apply -f k8s --recursive --namespace=coreografia-microservicos 
+    echo -e "[\e[33mWAIT\e[39m] Successfully"
+  exit
+}
+
+restart_deploy() {
+    echo -e "[\e[33mWAIT\e[39m] Deployment"
+    kubectl rollout restart deployment --namespace=coreografia-microservicos 
+    echo -e "[\e[33mWAIT\e[39m] Successfully"
+  exit
+}
+
+handle_command "$1" "$2"

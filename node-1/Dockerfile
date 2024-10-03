@@ -8,4 +8,10 @@ WORKDIR /home/node/app
 
 USER node
 
+COPY --chown=node:node . /home/node/app
+
+RUN yarn install
+
 EXPOSE 3000
+
+CMD ["yarn", "start:dev"]

@@ -1,0 +1,38 @@
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: app-env
+  data:
+      POSTGRES_HOST: "postgres-service"
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_MULTIPLE_DATABASES: "master,node_1,node_2"
+
+      MASTER_KAFKA_CLIENT_ID: 'master'
+      MASTER_KAFKA_GROUP_ID: 'master-group'
+      POSTGRES_DATABASE_MASTER: 'master'
+
+      NODE1_KAFKA_CLIENT_ID: 'node1'
+      NODE1_KAFKA_GROUP_ID: 'node1-group'
+      POSTGRES_DATABASE_NODE1: 'node_1'
+
+      NODE2_KAFKA_CLIENT_ID: 'node2'
+      NODE2_KAFKA_GROUP_ID: 'node2-group'
+      POSTGRES_DATABASE_NODE2: 'node_2'
+
+      KAFKA_BROKER_ID: "1"
+      KAFKA_BROKER: 'kafka-service:9092'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper-service"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
+      KAFKA_LISTENERS: "INTERNAL://:9092,OUTSIDE://:9094"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka-service:9092,OUTSIDE://kafka-service:9094"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT"
+      KAFKA_LOG_RETENTION_HOURS: "1"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_NUM_PARTITIONS: "3"
+
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'kafka-service:9092'
+      CONTROL_CENTER_REPLICATION_FACTOR: "1"
+      PORT: "9021"
