@@ -97,7 +97,7 @@ services:
     restart: on-failure
 
   kafka:
-    image: confluentinc/cp-kafka:6.0.0
+    image: confluentinc/cp-kafka:latest
     container_name: app-kafka
     depends_on:
       - zookeeper
@@ -120,7 +120,7 @@ services:
     restart: on-failure
 
   control-center:
-    image: confluentinc/cp-enterprise-control-center:6.0.0
+    image: confluentinc/cp-enterprise-control-center:latest
     container_name: control-center
     hostname: control-center
     depends_on:

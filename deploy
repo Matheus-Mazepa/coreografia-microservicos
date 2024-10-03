@@ -12,14 +12,14 @@ handle_command() {
 
 start_deploy() {
     echo -e "[\e[33mWAIT\e[39m] Deployment"
-    kubectl apply -f k8s --recursive
+    kubectl apply -f k8s --recursive --namespace=coreografia-microservicos 
     echo -e "[\e[33mWAIT\e[39m] Successfully"
   exit
 }
 
 restart_deploy() {
     echo -e "[\e[33mWAIT\e[39m] Deployment"
-    kubectl rollout restart deployment
+    kubectl rollout restart deployment --namespace=coreografia-microservicos 
     echo -e "[\e[33mWAIT\e[39m] Successfully"
   exit
 }
