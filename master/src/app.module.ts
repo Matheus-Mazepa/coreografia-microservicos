@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import {HealthModule} from "./health/health.module";
+import { LogsModule } from './logs/logs.module';
+import { HealthModule } from './health/health.module';
 
 const port = process.env.POSTGRES_PORT ? parseInt(process.env.POSTGRES_PORT) : 5432;
 
@@ -21,7 +22,8 @@ const port = process.env.POSTGRES_PORT ? parseInt(process.env.POSTGRES_PORT) : 5
       autoLoadEntities: true,
       logging: true,
     }),
-    HealthModule
+    LogsModule,
+    HealthModule,
   ],
 })
 export class AppModule {}

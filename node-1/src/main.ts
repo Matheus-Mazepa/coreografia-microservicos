@@ -10,11 +10,11 @@ async function bootstrap() {
     transport: Transport.KAFKA,
     options: {
       client: {
-        clientId: process.env.MASTER_KAFKA_CLIENT_ID,
-        brokers: [process.env.KAFKA_BROKER]
+        clientId: process.env.NODE1_KAFKA_CLIENT_ID,
+        brokers: [process.env.KAFKA_BROKER],
       },
       consumer: {
-        groupId: process.env.MASTER_KAFKA_GROUP_ID,
+        groupId: process.env.NODE1_KAFKA_GROUP_ID,
       },
       producer: {
         createPartitioner: Partitioners.LegacyPartitioner,
