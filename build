@@ -7,20 +7,19 @@ handle_command() {
 }
 
 start_build() {
-  local tag=$1
-    echo -e "[\e[33mWAIT\e[39m] Building images tag $tag"
-    docker build -t coreografia_microservicos/master:$tag master/.
-    docker build -t coreografia_microservicos/node-1:$tag node-1/.
-    docker build -t coreografia_microservicos/node-2:$tag node-2/.
-    docker build -t coreografia_microservicos/postgres:$tag postgres/.
+    # echo -e "[\e[33mWAIT\e[39m] Building images"
+    # docker build -t mazepa/coreografia-microservicos:master master/.
+    # docker build -t mazepa/coreografia-microservicos:node-1 node-1/.
+    # docker build -t mazepa/coreografia-microservicos:node-2 node-2/.
+    # docker build -t mazepa/coreografia-microservicos:postgres postgres/.
 
-    echo -e "[\e[33mWAIT\e[39m] Push images tag $tag"
-    docker push coreografia_microservicos/master:$tag
-    docker push coreografia_microservicos/node-1:$tag
-    docker push coreografia_microservicos/node-2:$tag
-    docker push coreografia_microservicos/postgres:$tag
+    echo -e "[\e[33mWAIT\e[39m] Push images"
+    docker push mazepa/coreografia-microservicos:master
+    docker push mazepa/coreografia-microservicos:node-1
+    docker push mazepa/coreografia-microservicos:node-2
+    docker push mazepa/coreografia-microservicos:postgres
 
-    echo -e "[\e[33mWAIT\e[39m] Successfully $tag"
+    echo -e "[\e[33mWAIT\e[39m] Successfully"
   exit
 }
 

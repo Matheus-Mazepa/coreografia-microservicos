@@ -4,7 +4,7 @@ services:
     build:
       context: ./master
       dockerfile: Dockerfile
-    image: master:dev
+    image: mazepa/coreografia-microservicos:master
     environment:
       KAFKA_BROKER: 'kafka:9092'
       MASTER_KAFKA_CLIENT_ID: 'master'
@@ -28,7 +28,7 @@ services:
     build:
       context: ./node-1
       dockerfile: Dockerfile
-    image: node-1:dev
+    image: mazepa/coreografia-microservicos:node-1
     environment:
       KAFKA_BROKER: 'kafka:9092'
       NODE1_KAFKA_CLIENT_ID: 'node1'
@@ -52,7 +52,7 @@ services:
     build:
       context: ./node-2
       dockerfile: Dockerfile
-    image: node-2:dev
+    image: mazepa/coreografia-microservicos:node-2
     environment:
       KAFKA_BROKER: 'kafka:9092'
       NODE2_KAFKA_CLIENT_ID: 'node2'
@@ -74,7 +74,7 @@ services:
   postgres:
     build: postgres/.
     container_name: app-postgres
-    image: postgres:dev
+    image: mazepa/coreografia-microservicos:postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
