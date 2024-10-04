@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pumba
+  labels:
+    app: pumba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pumba
+  template:
+    metadata:
+      labels:
+        app: pumba
+    spec:
+      containers:
+      - name: pumba
+        image: gaiaadm/pumba:master
+        args: ["--random", "--interval", "1m", "kill", "--signal", "SIGKILL", "re2:.*node|master.*"]
+        volumeMounts:
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
