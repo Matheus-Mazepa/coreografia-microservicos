@@ -7,11 +7,11 @@ handle_command() {
 }
 
 start_build() {
-    # echo -e "[\e[33mWAIT\e[39m] Building images"
-    # docker build -t mazepa/coreografia-microservicos:master master/.
-    # docker build -t mazepa/coreografia-microservicos:node-1 node-1/.
-    # docker build -t mazepa/coreografia-microservicos:node-2 node-2/.
-    # docker build -t mazepa/coreografia-microservicos:postgres postgres/.
+    echo -e "[\e[33mWAIT\e[39m] Building images"
+    docker build --platform linux/amd64,linux/arm64 -t mazepa/coreografia-microservicos:master master/.
+    docker build --platform linux/amd64,linux/arm64 -t mazepa/coreografia-microservicos:node-1 node-1/.
+    docker build --platform linux/amd64,linux/arm64 -t mazepa/coreografia-microservicos:node-2 node-2/.
+    docker build --platform linux/amd64,linux/arm64 -t mazepa/coreografia-microservicos:postgres postgres/.
 
     echo -e "[\e[33mWAIT\e[39m] Push images"
     docker push mazepa/coreografia-microservicos:master

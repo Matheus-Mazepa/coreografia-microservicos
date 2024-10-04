@@ -11,11 +11,33 @@ spec:
       labels:
         app: node-1
     spec:
+      initContainers:
+        - name: wait-for-kafka
+          image: busybox
+          command: ['sh', '-c', 'until nc -z kafka-service 9092; do echo waiting for kafka; sleep 2; done;']
       containers:
         - name: kafka
-          image: node-1:dev
+          image: mazepa/coreografia-microservicos:node-1
           ports:
             - containerPort: 3000
           envFrom:
             - configMapRef:
                 name: app-env
+          resources:
+            requests:
+              memory: "512Mi"
+            limits:
+              memory: "1Gi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      restartPolicy: Always

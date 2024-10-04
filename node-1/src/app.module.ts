@@ -17,7 +17,7 @@ const port = process.env.POSTGRES_PORT ? parseInt(process.env.POSTGRES_PORT) : 5
       port: port,
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DATABASE_NODE_1,
+      database: process.env.POSTGRES_DATABASE_NODE1,
       synchronize: true,
       autoLoadEntities: true,
       logging: true,
