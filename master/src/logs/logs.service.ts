@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { LogsEntity } from './logs.entity';
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { KafkaContext } from '@nestjs/microservices';
 
 @Injectable()
 export class LogsService {
@@ -19,9 +20,7 @@ export class LogsService {
     this.kafkaProducer
       .send({
         topic: 'node-1',
-        messages: [
-          { key: 'node-1', value: JSON.stringify(log)},
-        ],
+        messages: [{ key: 'node-1', value: JSON.stringify(log) }],
       })
       .then(() => {
         console.log('Success');
@@ -31,5 +30,21 @@ export class LogsService {
       });
 
     return log;
+  }
+
+  async update(id: number, context: KafkaContext): Promise<void> {
+    await this.logsRepository.update(id, {
+      the_flow_has_ended: true,
+    });
+
+    const { offset } = context.getMessage();
+
+    await context.getConsumer().commitOffsets([
+      {
+        topic: context.getTopic(),
+        partition: context.getPartition(),
+        offset: offset,
+      },
+    ]);
   }
 }

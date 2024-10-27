@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { LogsEntity } from './logs.entity';
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { KafkaContext } from '@nestjs/microservices';
 
 @Injectable()
 export class LogsService {
@@ -13,9 +14,20 @@ export class LogsService {
     private readonly kafkaProducer: Producer,
   ) {}
 
-  async create(id: number): Promise<LogsEntity> {
-    const log = this.logsRepository.create({initial_log: id});
+  async create(id: number, context: KafkaContext): Promise<LogsEntity> {
+    const log = this.logsRepository.create({ initial_log: id });
     await this.logsRepository.save(log);
+
+    const { offset } = context.getMessage();
+
+    await context.getConsumer().commitOffsets([
+      {
+        topic: context.getTopic(),
+        partition: context.getPartition(),
+        offset: offset,
+      },
+    ]);
+
     this.kafkaProducer
       .send({
         topic: 'master',
