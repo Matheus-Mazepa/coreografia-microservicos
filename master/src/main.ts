@@ -15,6 +15,7 @@ async function bootstrap() {
       },
       consumer: {
         groupId: process.env.MASTER_KAFKA_GROUP_ID,
+        autoCommit: false,
       },
       producer: {
         createPartitioner: Partitioners.LegacyPartitioner,

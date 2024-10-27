@@ -89,7 +89,6 @@ services:
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
 
-  # pumba: Será usado apenas em desenvolvimento para testar o resiliência do kafka
   pumba:
     image: gaiaadm/pumba:master
     container_name: pumba
