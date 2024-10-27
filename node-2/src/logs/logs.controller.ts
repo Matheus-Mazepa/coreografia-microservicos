@@ -7,7 +7,7 @@ import {
   Payload,
 } from '@nestjs/microservices';
 
-@Controller('/node-2')
+@Controller('/master')
 export class LogsController {
   constructor(private readonly logsService: LogsService) {}
 

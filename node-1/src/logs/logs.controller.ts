@@ -10,7 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { LogsEntity } from './logs.entity';
 import { Repository } from 'typeorm';
 
-@Controller('/node-1')
+@Controller('/master')
 export class LogsController {
   constructor(
     @InjectRepository(LogsEntity)
