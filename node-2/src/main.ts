@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
-import {Partitioners} from "kafkajs";
+import { Partitioners } from 'kafkajs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
